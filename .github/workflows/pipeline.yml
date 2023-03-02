@@ -2,7 +2,7 @@ name: Test-DevOPs Pipeline
 #run-name: ${{ github.actor }} is learning GitHub Actions
 #evento que irá adicionar a pipeline
 on: 
-  push
+  push:
     branches:
     - main
 
