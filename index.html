@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exemplo de Chamada na OpenAI API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+   #response-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+	}
+
+#response-container h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#response-container p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+    #response-text {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+	
+    #loading-container {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    #loading-spinner {
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid #3498db;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  </head>
+  <body>
+ 
+<form id="openai-form">
+  <label for="input-text">Insira o texto:</label>
+  <textarea type="text" id="input-text" name="input-text" rows="10" cols="50"></textarea>
+  <button type="submit">Enviar</button>
+</form>
+  <div>
+ <div id="response-container">
+    <h2>Resposta:</h2>
+    <p id="response-text"></p>
+  </div>
+
+  <div id="loading-container">
+    <div id="loading-spinner"></div>
+  </div>
+<script>
+  const form = document.getElementById('openai-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const inputText = document.getElementById('input-text').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.openai.com/v1/completions');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', 'Bearer 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');
+	
+	  const responseContainer = document.getElementById('response-container');
+      const responseText = document.getElementById('response-text');
+      const loadingContainer = document.getElementById('loading-container');
+
+    xhr.onload = function() {
+	    loadingContainer.style.display = 'none';
+        responseContainer.style.display = 'block';
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        const responseContainer = document.getElementById('response-container');
+        responseContainer.textContent = response.choices[0].text;
+        // Faça algo com a resposta
+      } else {
+        console.log('Erro na solicitação');
+      }
+    };
+
+    xhr.send(JSON.stringify({
+      "prompt": inputText,
+      "model": "text-davinci-003",
+	  "temperature": 0.7,
+	  "max_tokens": 256,
+	  "top_p": 1,
+	  "frequency_penalty": 0,
+	  "presence_penalty": 0
+    }));
+	loadingContainer.style.display = 'block';
+      responseContainer.style.display = 'none';
+  });
+</script>
+
+  </body>
+</html>
