@@ -24,4 +24,3 @@ on:
 
     - name: Run Python script
       run: python ./github/workflows/script.py
-
