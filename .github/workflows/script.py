@@ -3,6 +3,8 @@ import json
 from colorama import Fore, Back, Style
 import datetime
 import time
+import os
+
 
 class bcolors:
 	OKGREEN = '\033[32m'
@@ -19,10 +21,10 @@ vExportReturn = ""
 vExportHistory = "false"
 vImportHistory = "false"
 
-print ""
-print "--------------------------------------------------------------------------------------------------"
-print "Iniciando o job..."
-print ""
+print ("")
+print ("--------------------------------------------------------------------------------------------------")
+print ("Iniciando o job...")
+print ("")
 
 data = datetime.datetime.now()
 dia = ("0" + str(data.day)) if (len(str(data.day)) == 1) else str(data.day)
@@ -38,10 +40,10 @@ vExportFile = "HML_INC_"+dia+mes+ano+"_"+hora+minuto+segundo+".zip"
 
 print ("Watermark gerada com " + vWatermarkFile)
 print ("vExportFile gerada com " + vExportFile)
-print "-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -"
-print ""
+print ("-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -")
+print ("")
 
 
-print ""
-print "Execução do job finalizada"
-print "--------------------------------------------------------------------------------------------------"
+print ("")
+print ("Execução do job finalizada")
+print ("--------------------------------------------------------------------------------------------------")
