@@ -6,9 +6,6 @@ on:
       - r2-2023-new
 
 jobs:
-
-
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
